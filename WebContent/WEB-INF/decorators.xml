@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<decorators defaultdir="/decorator">
+	<decorator name="main" page="main_decorator.jsp">	<!-- 모든 폴더에 있는놈은 hello_decorator.jsp의 형식을 따라라 -->	
+		<pattern>/*</pattern>
+	</decorator>
+	<excludes>
+		<pattern>/hello/exclude.jsp</pattern> <!-- exclude.jsp놈은 보여주지 말아라 -->
+		<pattern>/news/exclude.jsp</pattern>
+	</excludes>
+</decorators>

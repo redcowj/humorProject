@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="boardns">
+	<resultMap type="board"		id="ResultMap">
+		<result property="num"		column="num" />
+		<result property="id"		column="id" />
+		<result property="subject" 		column="subject" />
+		<result property="content" 		column="content" />
+		<result property="readcount" 		column="readcount" />
+		<result property="reg_date" 		column="reg_date" />
+		<result property="best" 		column="best" />
+		<result property="del" 		column="del" />
+		<result property="ip" 		column="ip" />
+		<result property="head" 		column="head" />
+		<result property="category" 		column="category" />
+		<result property="ref" 		column="ref" />
+		<result property="re_step" 		column="re_step" />
+		<result property="re_level" 		column="re_level" />
+		<result property="time" 		column="time" />
+		<result property="startRow" 		column="startRow" />
+		<result property="endRow" 		column="endRow" />
+	</resultMap>
+	
+	<insert id="write" parameterType="board">
+		insert into board values(#{num}, #{id}, #{subject}, #{content}, 0, sysdate, 0, 'n', #{ip}, 
+								'head1', #{category},  0,0,0 )
+	</insert>
+	<select id="getMaxNum" resultType="int">
+		select nvl(max(num),0) from board
+	</select>
+	<select id="boardList" resultType="board">
+		select * from board order by num desc
+	</select>
+	<select id="boardList2" parameterType="board" resultType="board">
+		select * from (select rowNum rn, a.* from ( select * from board order by num desc ) a ) where rn between ${startRow} and ${endRow}  
+	</select>
+	<select id="select" parameterType="int" resultType="board">
+		select * from board where num = #{num}
+	</select>
+	<select id="total" resultType="int">
+		select count(*) from board 
+	</select>
+</mapper>

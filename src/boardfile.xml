@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="boardfilens">
+	<resultMap type="boardfile"	id="ResultMap">
+		<result property="fileName"		column="fileName" />
+		<result property="fileSize"		column="fileSize" />
+		<result property="num" 		column="num" />
+	</resultMap>
+	<insert id="insertFile" parameterType="boardfile">
+		insert into boardfile values(#{fileName},#{fileSize},#{num})
+	</insert>
+	<update id="tempChange" parameterType="int">
+		update boardfile set num=#{number} where num = 0 
+	</update>
+	<select id="getImage" parameterType="int" resultType="boardfile">
+		select * from boardfile where num = #{num}
+	</select>
+</mapper>
